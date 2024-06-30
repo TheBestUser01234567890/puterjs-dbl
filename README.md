@@ -6,7 +6,7 @@ puter.js has been moved to the
 <hr />
 
 <h3 align="center">Puter.js</h3>
-<h4 align="center">The official JavaScript SDK for Puter.com. Cloud and AI features right from your frontend code!</h4>
+<h4 align="center">A fork of the official JavaScript SDK for Puter.com. Cloud features right from your frontend code!</h4>
 <p align="center">
     <a href="https://docs.puter.com/playground/"><strong>« LIVE DEMO »</strong></a>
     <br />
@@ -24,7 +24,7 @@ puter.js has been moved to the
 
 ## Installation
 ```
-git clone https://github.com/HeyPuter/puter.js.git
+git clone https://github.com/TheBestUser01234567890/puterjs-dbl.git
 cd puter.js
 npm install
 ```
@@ -51,11 +51,6 @@ Make sure the development server is running.
     <script>
         // Loading ...
         puter.print(`Loading...`);
-
-        // Chat with GPT-3.5 Turbo
-        puter.ai.chat(`What color was Napoleon's white horse?`).then((response) => {
-            puter.print(response);
-        });
     </script>
 </body>
 </html>

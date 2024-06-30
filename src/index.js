@@ -4,7 +4,6 @@ import Hosting from './modules/Hosting.js';
 import Apps from './modules/Apps.js';
 import UI from './modules/UI.js';
 import KV from './modules/KV.js';
-import AI from './modules/AI.js';
 import Auth from './modules/Auth.js';
 import FSItem from './modules/FSItem.js';
 import * as utils from './lib/utils.js';
@@ -20,8 +19,13 @@ window.puter = (function() {
         // 'web' means the SDK is running in a 3rd-party website.
         env;
 
-        defaultAPIOrigin = 'https://api.puter.com';
-        defaultGUIOrigin = 'https://puter.com';
+        // For GUI mode only websites.
+        // Set by the user.
+        guiOnly = '';
+
+        // Those variables need to be set by the user.
+        defaultAPIOrigin = '';
+        defaultGUIOrigin = ''; 
 
         // An optional callback when the user is authenticated. This can be set by the app using the SDK.
         onAuth;
@@ -67,8 +71,7 @@ window.puter = (function() {
 
             // there are some specific situations where puter is definitely loaded in GUI mode
             // we're going to check for those situations here so that we don't break anything unintentionally
-            // if navigator URL's hostname is 'puter.com'
-            if(window.location.hostname === 'puter.com'){
+            if(window.location.hostname === guiOnly){
                 this.env = 'gui';
             }
 
@@ -105,7 +108,7 @@ window.puter = (function() {
             }
 
             // Construct APIOrigin from the URL. APIOrigin is used to build the URLs for the Puter API endpoints.
-            // The default APIOrigin is https://api.puter.com. However, if the URL contains a `puter.api_origin` query parameter,
+            // The default APIOrigin is set by the user. However, if the URL contains a `puter.api_origin` query parameter,
             // then that value is used as the APIOrigin. If the URL contains a `puter.domain` query parameter, then the APIOrigin
             // is constructed as `https://api.<puter.domain>`.
             this.APIOrigin = this.defaultAPIOrigin;
@@ -177,8 +180,6 @@ window.puter = (function() {
             this.hosting = new Hosting(this.authToken, this.APIOrigin, this.appID, this.env);
             // Apps
             this.apps = new Apps(this.authToken, this.APIOrigin, this.appID, this.env);
-            // AI
-            this.ai = new AI(this.authToken, this.APIOrigin, this.appID, this.env);
             // Key-Value Store
             this.kv = new KV(this.authToken, this.APIOrigin, this.appID, this.env);
             // Path
